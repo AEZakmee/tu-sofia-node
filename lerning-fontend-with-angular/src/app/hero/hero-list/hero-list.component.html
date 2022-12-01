@@ -12,15 +12,75 @@
           ></p-columnFilter>
         </div>
       </th>
-      <th>Universe</th>
-      <th>Powers</th>
+      <th style="min-width: 15rem">
+        <div class="flex justify-content-center align-items-center">
+          Universe
+          <p-columnFilter
+            type="text"
+            field="universe.name"
+            display="menu"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th style="min-width: 15rem">
+        <div class="flex justify-content-center align-items-center">
+          Powers
+          <p-columnFilter
+            type="powers"
+            field="name"
+            display="menu"
+          ></p-columnFilter>
+        </div>
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-hero>
     <tr>
       <td>{{ hero.name }}</td>
-      <td>{{ hero.universe.name }}</td>
+      <td>{{ hero.universe?.name }}</td>
       <td>{{ hero.powers }}</td>
     </tr>
   </ng-template>
 </p-table>
+
+<button
+  pButton
+  pRipple
+  label="New Hero"
+  icon="pi pi-plus"
+  class="p-button-success mr-2"
+  (click)="showDialog()"
+></button>
+
+<p-dialog
+  [(visible)]="heroDialog"
+  [style]="{ width: '450px' }"
+  header="Hero Details"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        pInputText
+        id="name"
+        [(ngModel)]="hero.name"
+        required
+        autofocus
+      />
+      <!-- <small class="p-error" *ngIf="submitted && !hero.name"
+        >Name is required.</small
+      > -->
+    </div>
+    <button
+      pButton
+      pRipple
+      label="Create"
+      icon="pi pi-plus"
+      class="p-button-success mr-2"
+      (click)="createHero()"
+    ></button>
+  </ng-template>
+</p-dialog>
