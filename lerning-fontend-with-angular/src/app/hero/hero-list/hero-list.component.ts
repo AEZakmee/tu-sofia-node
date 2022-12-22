@@ -40,4 +40,13 @@ export class HeroListComponent implements OnInit {
       error: (err) => {},
     });
   }
+
+  deleteHero(id: number) {
+    this.heroService.deleteHero(id).subscribe({
+      next: () => {
+        this.ngOnInit();
+      },
+      error: (err) => {},
+    });
+  }
 }

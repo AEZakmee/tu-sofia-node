@@ -14,4 +14,8 @@ export class HeroService {
   createHero(hero: Hero) {
     return this.http.post(`${environment.backendUrl}/hero`, hero);
   }
+
+  deleteHero(id: number) {
+    return this.http.delete(`${environment.backendUrl}/hero/${id}`);
+  }
 }
